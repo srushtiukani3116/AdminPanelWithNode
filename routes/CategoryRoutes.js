@@ -11,4 +11,6 @@ routes.get('/viewCategory' , passport.checkAuthUser, categoryClt.viewCategory);
 
 routes.get('/deleteCategory' ,categoryClt.deleteCategory);
 
+routes.post('/EditCategory' , categoryClt.EditCategory);
+
 module.exports = routes;

@@ -38,18 +38,27 @@ module.exports.viewCategory = async(req,res)=>{
             search = req.query.categorySearch
         }
 
+        let date ;
+        if(req.query.date){
+            date = req.query.date;
+        }
+
         let perPage = 2;
         let page = 0;
         if(req.query.page){
             page = req.query.page
         }
 
-        let CategoryData = await CategoryModel.find(
-            {categoryName : {$regex : search}}
-        ).skip(page*perPage).limit(perPage);
+        let CategoryData = await CategoryModel.find({
+            categoryName : {$regex : search,$options:'i'},
+            ...(date && {createdAt:{$gte:new Date(date).setHours(0,0,0,0),$lte:new Date(date).setHours(23,59,59,999)}})
+        }).skip(page*perPage).limit(perPage);
 
         let totalRecord = await CategoryModel.find(
-            {categoryName : {$regex : search}}
+            {
+                categoryName : {$regex : search,$options:'i'},
+                ...(date && {createdAt:{$gte:new Date(date).setHours(0,0,0,0),$lte:new Date(date).setHours(23,59,59,999)}})
+            }
         ).countDocuments();
 
         var totalCategoryData = Math.ceil(totalRecord/perPage);
@@ -58,8 +67,8 @@ module.exports.viewCategory = async(req,res)=>{
             res.render('Category/ViewCategory',{
                 CategoryData,
                 search,
-                page,
-                totalCategoryData
+                page:parseInt(page),
+                totalCategoryData,date
             });
         }
         else{
@@ -83,7 +92,25 @@ module.exports.deleteCategory = async(req,res)=>{
             res.redirect('back');
         }
         else{
-            console.log("Something is Wrong Please Try Again..😊");
+            console.log("Record Not Deleted Please Try Again...😊");
+        }
+    }
+    catch(err){
+        console.log("Something Is Wrong Please Try Again...😀")
+        return res.redirect('back');
+    }
+}
+
+module.exports.EditCategory = async(req,res)=>{
+    try{
+        const UpdatedCategory = await category.findByIdAndUpdate(req.body.id , req.body);
+        if(UpdatedCategory){
+            console.log('Data Updated Successfully...😀')
+            return res.redirect('back');
+        }
+        else{
+            console.log("Data Not Updated Please Try Again");
+            return res.redirect('back');
         }
     }
     catch(err){

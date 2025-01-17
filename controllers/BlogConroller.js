@@ -46,6 +46,7 @@ module.exports.viewBlog = async (req,res)=>{
             search = req.query.blogSearch;
         }
 
+
         // Pagination 
 
         var perPage = 3;
@@ -56,15 +57,15 @@ module.exports.viewBlog = async (req,res)=>{
 
         var viewAllBlogs = await Blog.find({
            $or : [
-                {title : {$regex : search}},
-                {description : {$regex : search}}
+                {title : {$regex : search,$options:'i'}},
+                {description : {$regex : search,$options:'i'}}
            ]
         }).skip(perPage*page).limit(perPage).populate('categoryId').exec();
 
         var totalRecord = await Blog.find({
            $or : [
-                {title : {$regex : search}},
-                {description : {$regex : search}}
+                {title : {$regex : search,$options:'i'}},
+                {description : {$regex : search,$options:'i'}}
            ]
         }).countDocuments();
         var totalData = Math.ceil(totalRecord/perPage);
@@ -74,7 +75,7 @@ module.exports.viewBlog = async (req,res)=>{
                     viewAllBlogs,
                     search,
                     totalData,
-                    page
+                    page,
                 });
             }
             else{

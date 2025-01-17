@@ -41,11 +41,11 @@ routes.get('/emailverify' , AdminClt.emailverify);
 
 routes.post('/checkemailverify' , AdminClt.checkemailverify);
 
-routes.get('/checkOtp' ,passport.checkAuthUser, AdminClt.checkOtp);
+routes.get('/checkOtp' , AdminClt.checkOtp);
 
 routes.post('/checkVerifyOtp' , AdminClt.checkVerifyOtp);
 
-routes.get('/forgotPass' ,passport.checkAuthUser, AdminClt.forgotPass);
+routes.get('/forgotPass' , AdminClt.forgotPass);
 
 routes.post('/forgotPassVerify' , AdminClt.forgotPassVerify);
 

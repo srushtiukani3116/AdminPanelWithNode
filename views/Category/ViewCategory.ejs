@@ -30,7 +30,9 @@
                 <div class="card mb-4">
                     <div class="d-flex my-4">
                         <form class="my-4">
-                            <input type="text" name="categorySearch" value="<%= search %>" placeholder="Search Here..."/> <input type="submit" value="search" class="btn btn-danger"/>
+                            <input type="text" name="categorySearch" value="<%= search %>" placeholder="Search Here..."/> 
+                            <input type="date" name="date" value="<%= date? new Date(date).toISOString().split('T')[0]:'' %>"/>
+                            <input type="submit" value="search" class="btn btn-danger"/>
                         </form>
                         <a href="/category/viewCategory" class="mt-4 ms-2"><button class="btn btn-primary" >Reset</button></a>
                     </div>
@@ -54,7 +56,7 @@
                                 <td>
                                   <a href="/category/deleteCategory/?deletecategoryId=<%= v.id %>"><button class="btn btn-primary">Delete</button></a>
                                   ||
-                                  <a><button class="btn btn-primary">Update</button></a>
+                                  <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#CategoryUpdate" onclick="CategoryUpdate(`<%= JSON.stringify(v) %>`)"><button class="btn btn-primary">Update</button></a>
                                 </td>
                             </tr>
                         <% }) %>
@@ -71,11 +73,11 @@
                     </td>
                     <ul class="pagination pagination-sm m-0 float-end">
                     
-                        <a href="/category/viewCategory?page=<%= parseInt(page)-1 %>&categorySearch =<%= search %>" class="btn btn-primary <%= page <= 0 ? 'disabled' : '' %>">Prev</a>                                                     
+                        <a href="/category/viewCategory?page=<%= page-1 %><%= search? '&categorySearch='+ search:'' %><%=date ?'&date='+ date:'' %>" class="btn btn-primary <%= page <= 0 ? 'disabled' : '' %>">Prev</a>                                                     
                        <li>
-                        <a href="/category/viewCategory?page=<%= parseInt(page) %>&categorySearch=<%= search %>"><button class="btn btn-primary mx-2"><%= parseInt(page)+1 %></button></a>
+                        <a href="/category/viewCategory?page=<%= page %>&categorySearch=<%= search %>"><button class="btn btn-primary mx-2"><%= page+1 %></button></a>
                        </li>
-                        <a href="/category/viewCategory?page=<%= parseInt(page)+1 %>&categorySearch=<%= search %>" class="btn btn-primary <%= totalCategoryData <= parseInt(page) + 1 ? 'disabled' : ''  %>">Next</a>
+                        <a href="/category/viewCategory?page=<%= page+1 %><%= search? '&categorySearch='+ search:'' %><%=date ?'&date='+ date:'' %>" class="btn btn-primary <%= totalCategoryData <= parseInt(page) + 1 ? 'disabled' : ''  %>">Next</a>
                     </ul>
                   </div>
                 </div>
@@ -86,9 +88,38 @@
           <!--end::Container-->
         </div>
         <!--end::App Content-->
+
+        <!-- CategoryUpdateModel-->
+
+          <!-- Modal -->
+            <div class="modal fade" id="CategoryUpdate" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body">
+                    <form method="post" action="/category/EditCategory" class="p-4">
+                      <input type="hidden" name="id" id="id">
+                      <input type="text" class="form-control" id="categoryName" name="categoryName" placeholder="Enter Your Category"/><br/>
+                      <input class="btn btn-success" type="submit" name="submit"/>
+                  </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+
       </main>
       <!--end::App Main-->
       <!--begin::Footer-->
       
+      <script>
+        function CategoryUpdate(item){
+          const updateCategory = JSON.parse(item);
+          document.querySelector('#id').value = updateCategory._id;
+          document.querySelector('#categoryName').value = updateCategory.categoryName;
+        }
+      </script>
 
 <%- include('../Footer') %>
