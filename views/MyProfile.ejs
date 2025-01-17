@@ -1,0 +1,70 @@
+<%- include('Header') %>
+
+
+      <!-- ============================================================== -->
+      <!-- End Left Sidebar - style you can find in sidebar.scss  -->
+      <!-- ============================================================== -->
+      <!-- ============================================================== -->
+      <!-- Page wrapper  -->
+      <!-- ============================================================== -->
+      <div class="page-wrapper">
+        <!-- ============================================================== -->
+        <!-- Bread crumb and right sidebar toggle -->
+        <!-- ============================================================== -->
+        <div class="page-breadcrumb">
+          <div class="container">
+            <div class="row">
+                <div class="col-12 d-flex no-block align-items-center">
+                  <h4 class="page-title">Tables</h4>
+                  <div class="ms-auto text-end">
+                    <nav aria-label="breadcrumb">
+                      <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="/dashbord">Home</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">
+                         <a href="/ViewData"> Library</a>
+                        </li>
+                      </ol>
+                    </nav>
+                  </div>
+                </div>
+              </div>
+          </div>
+        </div>
+        <div class="container-fluid d-flex justify-content-center align-items-center py-4 text-bg-primary">
+          <div class="row">
+            <div class="col-12">
+              <div class="card">
+                <div class="card-body">
+                    <div>
+                      <img src="<%= locals.user.image %>" height="130" width="130" style="border-radius: 50%;"/>
+                      <h2><%= locals.user.name %></h2>
+                      <h4>Email :- <%= locals.user.email %></h4>
+                      <h6>Gender :- <%= locals.user.gender %></h6>
+                      <h5>Hobbys :- <%= locals.user.hobby %></h5>
+                      <h6>City :- <%= locals.user.city %></h6>
+                      <h5>Description :- <%= locals.user.message %></h5>
+                      <a href="/updateData/?uId=<%= locals.user._id %>"><button class="btn btn-primary text-white">Edit Page</button></a>
+                    </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- ============================================================== -->
+          <!-- End PAge Content -->
+          <!-- ============================================================== -->
+          <!-- ============================================================== -->
+          <!-- Right sidebar -->
+          <!-- ============================================================== -->
+          <!-- .right-sidebar -->
+          <!-- ============================================================== -->
+          <!-- End Right sidebar -->
+          <!-- ============================================================== -->
+        </div>
+        <!-- ============================================================== -->
+        <!-- End Container fluid  -->
+        <!-- ============================================================== -->
+        <!-- ============================================================== -->
+        <!-- footer -->
+        <!-- ============================================================== -->
+        
+<%- include('Footer') %>

@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>AddBlogs Page</title>
+    <link type="text/css" href="/css/style.css" rel="stylesheet"/>
+</head>
+<body>
+
+    <h1 style="text-align: center;"></h1>
+    
+    
+</body>
+</html>
+
+
+
+
+<%- include('../Header') %>
+
+      <!--end::Sidebar-->
+      <!--begin::App Main-->
+      <main class="app-main">
+        <!--begin::App Content Header-->
+        <div class="app-content-header">
+          <!--begin::Container-->
+          <div class="container-fluid">
+            <!--begin::Row-->
+            <div class="row">
+              <div class="col-sm-6"><h3 class="mb-0">Edit Blog</h3></div>
+              <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-end">
+                  <li class="breadcrumb-item"><a href="#">Home</a></li>
+                  <li class="breadcrumb-item active" aria-current="page">Edit Blog</li>
+                </ol>
+              </div>
+            </div>
+            <!--end::Row-->
+          </div>
+          <!--end::Container-->
+        </div>
+        <!--end::App Content Header-->
+        <!--begin::App Content-->
+        <div class="app-content">
+          <!--begin::Container-->
+          <div class="container-fluid">
+            <!--begin::Row-->
+            <div class="row g-4">
+              <!--begin::Col-->
+              <div class="col-md-6">
+                <!--begin::Horizontal Form-->
+                <div class="card card-warning card-outline mb-4">
+                  <!--begin::Header-->
+                  <div class="card-header"><div class="card-title">Edit Blog</div></div>
+                  <!--end::Header-->
+                  <!--begin::Form-->
+                  <form method="post" action="/blog/EditData" >
+                    <input type="hidden" name="editId" value="<%= singleBlog.id %>"/>
+                    <table border="1" cellpadding="8" align="center">
+                        <tr>
+                            <td>Enter Category :- </td>
+                            <td>
+                                <select name="categoryId">
+                                    <option value="">--Select Category--</option>
+                                    <% allCategory.map((item,i)=>{ %>
+                                        <option value="<%= item.id %>"
+                                            <% if(singleBlog.categoryId== item.id){ %> <%= 'selected' %> <% } %>><%= item.categoryName %></option>
+                                    <% }) %>
+                                </select>
+                            </td>
+                        </tr>
+            
+                        <tr>
+                            <td>Enter Your Title :- </td>
+                            <td><input type="text" name="title" value="<%= singleBlog.title %>"/></td>
+                        </tr>
+            
+                        <tr>
+                            <td>Enter Your Description :- </td>
+                            <td><textarea name="description"><%= singleBlog.description %></textarea></td>
+                        </tr>
+            
+                        <tr>
+                            <td> Your Status :- </td>
+                            <td><input type="text" name="status" value="<%= singleBlog.status %>"/></td>
+                        </tr>
+            
+                        <tr>
+                            <td>Enter Date :- </td>
+                            <td><input type="date" name="BlogDate" value="<%= singleBlog.BlogDate %>"/></td>
+                        </tr>
+            
+                        <tr>
+                            <td></td>
+                            <td><input type="submit" name="submit" value="Update"/></td>
+                        </tr>
+                    </table>
+                </form>
+                  <!--end::Form-->
+                </div>
+                <!--end::Horizontal Form-->
+              </div>
+              <!--end::Col-->
+            </div>
+            <!--end::Row-->
+          </div>
+          <!--end::Container-->
+        </div>
+        <!--end::App Content-->
+      </main>
+      <!--end::App Main-->
+    
+<%- include('../Footer') %>

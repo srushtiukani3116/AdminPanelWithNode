@@ -1,0 +1,173 @@
+<%- include('Header') %>
+
+      <!--end::Sidebar-->
+      <!--begin::App Main-->
+      <main class="app-main">
+        <!--begin::App Content Header-->
+        <div class="app-content-header">
+          <!--begin::Container-->
+          <div class="container-fluid">
+            <!--begin::Row-->
+            <div class="row">
+              <div class="col-sm-6"><h3 class="mb-0">General Form</h3></div>
+              <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-end">
+                  <li class="breadcrumb-item"><a href="#">Home</a></li>
+                  <li class="breadcrumb-item active" aria-current="page">General Form</li>
+                </ol>
+              </div>
+            </div>
+            <!--end::Row-->
+          </div>
+          <!--end::Container-->
+        </div>
+        <!--end::App Content Header-->
+        <!--begin::App Content-->
+        <div class="app-content">
+          <!--begin::Container-->
+          <div class="container-fluid">
+            <!--begin::Row-->
+            <div class="row g-4">
+              <!--begin::Col-->
+              <div class="col-md-6">
+                <!--begin::Horizontal Form-->
+                <div class="card card-warning card-outline mb-4">
+                  <!--begin::Header-->
+                  <div class="card-header"><div class="card-title">Horizontal Form</div></div>
+                  <!--end::Header-->
+                  <!--begin::Form-->
+                  <form method="post" action="/EditData" enctype="multipart/form-data">
+                    <input type="hidden" name="editId" value="<%= singleAdmin.id %>"/>
+                    <!--begin::Body-->
+                    <div class="card-body">
+
+                        <!-- FirstName  -->
+                        <div class="row mb-3">
+                            <label for="inputEmail3" class="col-sm-2 col-form-label">First Name</label>
+                            <div class="col-sm-10">
+                            <input type="text" class="form-control" id="inputEmail3" name="fname" value="<%= singleAdmin.name.split(' ')[0] %>"/>
+                            </div>
+                        </div>
+
+                        <!-- LastName -->
+                        <div class="row mb-3">
+                            <label for="inputEmail3" class="col-sm-2 col-form-label">Last Name</label>
+                            <div class="col-sm-10">
+                            <input type="text" class="form-control" id="inputEmail3" name="lname" value="<%= singleAdmin.name.split(' ')[1] %>"/>
+                            </div>
+                        </div>
+
+                        <!-- Email  -->
+                        <div class="row mb-3">
+                            <label for="inputEmail3" class="col-sm-2 col-form-label">Email</label>
+                            <div class="col-sm-10">
+                            <input type="email" class="form-control" id="inputEmail3" name="email" value="<%= singleAdmin.email %>"/>
+                            </div>
+                        </div>
+
+                        <!-- Password -->
+                        <div class="row mb-3">
+                            <label for="inputPassword3" class="col-sm-2 col-form-label">Password</label>
+                            <div class="col-sm-10">
+                            <input type="password" class="form-control" id="inputPassword3" name="password" value="<%= singleAdmin.password %>" />
+                            </div>
+                        </div>
+
+                        <!-- Gender  -->
+                        <fieldset class="row mb-3">
+                            <legend class="col-form-label col-sm-2 pt-0">Gender</legend>
+                            <div class="col-sm-10">
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" id="gridRadiosMale" name="gender" value="Male"
+                                <% if(singleAdmin.gender=='Male'){ %> <%= 'checked' %> <% } %>/>Male
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" id="gridRadiosFeMale" name="gender" value="FeMale"
+                                <% if(singleAdmin.gender=='FeMale'){ %> <%= 'checked' %> <% } %>/>FeMale
+                            </div>
+                            </div>
+                        </fieldset>
+
+                        <!-- Hobby  -->
+                        <div class="form-group row mb-3">
+                            <label class="col-sm-2 col-form-label">Hobby</label>
+                            <div class="col-md-9">
+                            <div class="form-check col-sm-10">
+                                <input type="checkbox" class="form-check-input" id="customControlAutosizing1" name="hobby" value="Reading"
+                                <% if(singleAdmin.hobby.includes('Reading')){ %> <%= 'checked' %> <% } %>/>
+                                <label class="form-check-label mb-0" for="customControlAutosizing1">Reading</label>
+                            </div>
+                            <div class="form-check col-sm-10">
+                                <input type="checkbox"class="form-check-input" id="customControlAutosizing2" name="hobby" value="Travelling"
+                                <% if(singleAdmin.hobby.includes('Travelling')){ %> <%= 'checked' %> <% } %>/>
+                                <label
+                                class="form-check-label mb-0"
+                                for="customControlAutosizing2"
+                                >Travelling</label
+                                >
+                            </div>
+                            <div class="form-check col-sm-10">
+                                <input type="checkbox" class="form-check-input" id="customControlAutosizing3" name="hobby" value="Dancing"
+                                <% if(singleAdmin.hobby.includes('Dancing')){ %> <%= 'checked' %> <% } %>/>
+                                <label
+                                class="form-check-label mb-0"
+                                for="customControlAutosizing3"
+                                >Dancing</label
+                                >
+                            </div>
+                            </div>
+                        </div>
+
+                        <!-- City -->
+                        <div class="form-group row mb-3">
+                            <label class="col-sm-2 col-form-label">City</label>
+                            <div class="col-md-9">
+                            <% var cityName = ['Surat' , 'Rajkot' , 'Vadodra' , 'Valsad' , 'Vapi'] %>
+                            <select name="city" class="select2 form-select shadow-none" style="width: 100%; height: 36px">
+                                <option value="">--Select--city--</option>
+                                <% cityName.map((v,i)=>{ %>
+                                <option value="<%= v %>"
+                                    <% if(singleAdmin.city==v){ %> <%= 'selected' %> <% } %>><%= v %></option>
+                                <% }) %>
+                            </select>
+                            </div>
+                        </div>
+
+                        <!-- Message  -->
+                        <div class="row mb-3">
+                            <label class="col-sm-2 col-form-label" for="inputGroupFile02">Message</label>
+                            <div class="col-sm-10">
+                                <textarea class="form-control" name="message"><%= singleAdmin.message %></textarea>
+                            </div>
+                        </div>
+
+                        <!-- Image  -->
+                        <div class="row mb-3">
+                            <label class="col-sm-2 col-form-label" for="inputGroupFile02">Image</label>
+                            <div class="col-sm-10">
+                                <img src="<%= singleAdmin.image %>" width="100" height="130"/>
+                                <input type="file" class="form-control" id="inputGroupFile02" name="image"/>
+                            </div>
+                        </div>
+                        <!-- Button  -->
+                        <div class="card-footer">
+                            <button type="submit" class="btn btn-warning" value="Update">Submit</button>
+                        </div>
+                    </div>
+                    <!--end::Body-->
+                  </form>
+                  <!--end::Form-->
+                </div>
+                <!--end::Horizontal Form-->
+              </div>
+              <!--end::Col-->
+            </div>
+            <!--end::Row-->
+          </div>
+          <!--end::Container-->
+        </div>
+        <!--end::App Content-->
+      </main>
+      <!--end::App Main-->
+    
+<%- include('Footer') %>

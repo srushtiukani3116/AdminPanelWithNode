@@ -1,0 +1,94 @@
+<%- include('../Header') %>
+      <!--end::Sidebar-->
+      <!--begin::App Main-->
+      <main class="app-main">
+        <!--begin::App Content Header-->
+        <div class="app-content-header">
+          <!--begin::Container-->
+          <div class="container-fluid">
+            <!--begin::Row-->
+            <div class="row">
+              <div class="col-sm-6"><h3 class="mb-0">View-Category</h3></div>
+              <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-end">
+                  <li class="breadcrumb-item"><a href="#">Home</a></li>
+                  <li class="breadcrumb-item active" aria-current="page">Simple Tables</li>
+                </ol>
+              </div>
+            </div>
+            <!--end::Row-->
+          </div>
+          <!--end::Container-->
+        </div>
+        <!--end::App Content Header-->
+        <!--begin::App Content-->
+        <div class="app-content">
+          <!--begin::Container-->
+          <div class="container-fluid">
+            <!--begin::Row-->
+            <div class="row">
+                <div class="card mb-4">
+                    <div class="d-flex my-4">
+                        <form class="my-4">
+                            <input type="text" name="categorySearch" value="<%= search %>" placeholder="Search Here..."/> <input type="submit" value="search" class="btn btn-danger"/>
+                        </form>
+                        <a href="/category/viewCategory" class="mt-4 ms-2"><button class="btn btn-primary" >Reset</button></a>
+                    </div>
+                  <!-- /.card-header -->
+                  <div class="card-body">
+                    <table class="table table-bordered">
+                      <thead>
+                        <tr>
+                            <th>CategoryName</th>
+                            <th>CreatedDate</th>
+                            <th>UpdatedDate</th>
+                            <th>Action</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <% CategoryData.map((v,i)=>{ %>
+                            <tr>
+                                <td><%= v.categoryName %></td>
+                                <td><%= new Date(v.createdAt).toLocaleDateString() %></td>
+                                <td><%= new Date(v.updatedAt).toLocaleDateString() %></td>
+                                <td>
+                                  <a href="/category/deleteCategory/?deletecategoryId=<%= v.id %>"><button class="btn btn-primary">Delete</button></a>
+                                  ||
+                                  <a><button class="btn btn-primary">Update</button></a>
+                                </td>
+                            </tr>
+                        <% }) %>
+                        
+                      </tbody>
+                    </table>
+                  </div>
+                  <!-- /.card-body -->
+                  <div class="card-footer clearfix">
+                    <td>
+                        <% for(var i=0; i < totalCategoryData ; i++){ %>
+                            <a href="/category/viewCategory?page=<%= i %>&categorySearch =<%= search %>"><button class="btn btn-primary"><%= i+1 %></button></a>
+                        <% } %>
+                    </td>
+                    <ul class="pagination pagination-sm m-0 float-end">
+                    
+                        <a href="/category/viewCategory?page=<%= parseInt(page)-1 %>&categorySearch =<%= search %>" class="btn btn-primary <%= page <= 0 ? 'disabled' : '' %>">Prev</a>                                                     
+                       <li>
+                        <a href="/category/viewCategory?page=<%= parseInt(page) %>&categorySearch=<%= search %>"><button class="btn btn-primary mx-2"><%= parseInt(page)+1 %></button></a>
+                       </li>
+                        <a href="/category/viewCategory?page=<%= parseInt(page)+1 %>&categorySearch=<%= search %>" class="btn btn-primary <%= totalCategoryData <= parseInt(page) + 1 ? 'disabled' : ''  %>">Next</a>
+                    </ul>
+                  </div>
+                </div>
+              <!-- /.col -->
+            </div>
+            <!--end::Row-->
+          </div>
+          <!--end::Container-->
+        </div>
+        <!--end::App Content-->
+      </main>
+      <!--end::App Main-->
+      <!--begin::Footer-->
+      
+
+<%- include('../Footer') %>

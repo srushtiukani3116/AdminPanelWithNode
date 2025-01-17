@@ -1,0 +1,85 @@
+<%- include('../Header') %>
+
+      <!--end::Sidebar-->
+      <!--begin::App Main-->
+      <main class="app-main">
+        <!--begin::App Content Header-->
+        <div class="app-content-header">
+          <!--begin::Container-->
+          <div class="container-fluid">
+            <!--begin::Row-->
+            <div class="row">
+              <div class="col-sm-6"><h3 class="mb-0">AddBlog</h3></div>
+              <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-end">
+                  <li class="breadcrumb-item"><a href="/dashbord">Home</a></li>
+                  <li class="breadcrumb-item active" aria-current="page">AddBlog</li>
+                </ol>
+              </div>
+            </div>
+            <!--end::Row-->
+          </div>
+          <!--end::Container-->
+        </div>
+        <!--end::App Content Header-->
+        <!--begin::App Content-->
+        <div class="app-content">
+          <!--begin::Container-->
+          <div class="container-fluid">
+            <!--begin::Row-->
+            <div class="row g-4">
+              <!--begin::Col-->
+              <div class="col-md-6">
+                <!--begin::Horizontal Form-->
+                <div class="card card-warning card-outline mb-4">
+                  <!--begin::Header-->
+                  <div class="card-header"><div class="card-title">Horizontal Form</div></div>
+                  <!--end::Header-->
+                  <!--begin::Form-->
+                  <form method="post" action="/blog/insertBlog">
+                    <table border="1"class="table">
+                        <tr>
+                            <td>Enter Category :- </td>
+                            <td>
+                                <select name="categoryId">
+                                    <option value="">--Select Category--</option>
+                                    <% CategoryData.map((item,i)=>{ %>
+                                        <option value="<%= item.id %>"><%= item.categoryName %></option>
+                                    <% }) %>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Enter Your Title :- </td>
+                            <td><input type="text" name="title"/></td>
+                        </tr>
+                        <tr>
+                            <td>Enter Your Description :- </td>
+                            <td><textarea name="description"></textarea></td>
+                        </tr>
+                        <tr>
+                            <td> Your Status :- </td>
+                            <td><input type="text" name="status"/></td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td><input type="submit" name="submit"/></td>
+                        </tr>
+                    </table>
+                </form>
+                  <!--end::Form-->
+                </div>
+                <!--end::Horizontal Form-->
+              </div>
+              <!--end::Col-->
+            </div>
+            <!--end::Row-->
+          </div>
+          <!--end::Container-->
+        </div>
+        <!--end::App Content-->
+      </main>
+      <!--end::App Main-->
+    
+<%- include('../Footer') %>
+
